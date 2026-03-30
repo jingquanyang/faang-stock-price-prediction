@@ -22,7 +22,9 @@ faang-stock-direction-prediction/
 └── README.md
 
 Notebooks
-#NotebookDescriptionLink1Data WranglingLoad and combine raw FAANG CSVs, parse dates, inspect missing values, explore distributions▶ View on nbviewer2Feature EngineeringConstruct returns, moving averages, volatility windows, intraday spreads, and lagged features; define binary target▶ View on nbviewer3Modeling & EvaluationTrain and compare Logistic Regression, Random Forest, and Gradient Boosting; evaluate on held-out test set; feature importance analysis▶ View on nbviewer
+1Data WranglingLoad and combine raw FAANG CSVs, parse dates, inspect missing values, explore distributions
+2Feature EngineeringConstruct returns, moving averages, volatility windows, intraday spreads, and lagged features; define binary target
+3Modeling & EvaluationTrain and compare Logistic Regression, Random Forest, and Gradient Boosting; evaluate on held-out test set; feature importance analysis
 
 Features Engineered
 CategoryFeaturesReturnsReturn1, Return3, Return5, Return10Moving AveragesMA7, MA14, MA30VolatilityVolatility7, Volatility14, Volatility30Intraday SpreadsHigh_Low_Spread, Open_Close_SpreadLagged ReturnsLag1, Lag2, Lag3
