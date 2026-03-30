@@ -1,14 +1,22 @@
-FAANG Stock Direction Prediction
-A machine learning project that predicts the next-day price direction (up or down) of FAANG stocks using engineered technical features and three classification models: Logistic Regression, Random Forest, and Gradient Boosting.
+# FAANG Stock Direction Prediction
 
-Best model — Gradient Boosting: Accuracy 0.518 · Precision 0.520 · Recall 0.762 · F1 0.618
+A machine learning project that predicts the **next-day price direction** (up or down) of FAANG stocks using engineered technical features and three classification models: Logistic Regression, Random Forest, and Gradient Boosting.
 
+> **Best model — Gradient Boosting:** Accuracy 0.518 · Precision 0.520 · Recall 0.762 · F1 0.618
 
-Project Overview
-Daily stock returns are noisy and close to a random walk, so the goal is not to achieve high accuracy alone, but to build a model with strong recall and F1-score for "up" days — capturing as many true upward movements as possible while keeping false positives reasonable.
-Target variable: Binary — 1 if tomorrow's adjusted closing price is higher than today's, 0 otherwise.
+---
 
-Repository Structure
+## Project Overview
+
+Daily stock returns are noisy and close to a random walk, so the goal is not to achieve high accuracy alone, but to build a model with strong **recall and F1-score** for "up" days — capturing as many true upward movements as possible while keeping false positives reasonable.
+
+**Target variable:** Binary — `1` if tomorrow's adjusted closing price is higher than today's, `0` otherwise.
+
+---
+
+## Repository Structure
+
+```
 faang-stock-direction-prediction/
 ├── data/                        # Raw daily OHLCV CSV files for each FAANG company
 ├── notebooks/
@@ -20,30 +28,63 @@ faang-stock-direction-prediction/
 │   └── FAANG_Presentation.pdf          # Slide deck with motivation and results
 ├── model_metrics.csv            # Final model hyperparameters and evaluation metrics
 └── README.md
+```
 
-Notebooks
-1Data WranglingLoad and combine raw FAANG CSVs, parse dates, inspect missing values, explore distributions
-2Feature EngineeringConstruct returns, moving averages, volatility windows, intraday spreads, and lagged features; define binary target
-3Modeling & EvaluationTrain and compare Logistic Regression, Random Forest, and Gradient Boosting; evaluate on held-out test set; feature importance analysis
+---
 
-Features Engineered
-CategoryFeaturesReturnsReturn1, Return3, Return5, Return10Moving AveragesMA7, MA14, MA30VolatilityVolatility7, Volatility14, Volatility30Intraday SpreadsHigh_Low_Spread, Open_Close_SpreadLagged ReturnsLag1, Lag2, Lag3
+## Notebooks
 
-Model Results
-ModelAccuracyPrecisionRecallF1Logistic Regression0.510.510.850.64Random Forest0.520.530.710.60Gradient Boosting ✅0.520.520.760.62
-Gradient Boosting was selected as the final model. It achieved the highest recall and F1-score, meaning it captures the most true upward movements with the best precision-recall balance. Top predictors include Lag1, Return1, Open_Close_Spread, High_Low_Spread, and MA7.
-Final model hyperparameters: n_estimators=150, learning_rate=0.05, max_depth=3, random_state=42
+| # | Notebook | Description | Link |
+|---|----------|-------------|------|
+| 1 | Data Wrangling | Load and combine raw FAANG CSVs, parse dates, inspect missing values, explore distributions | [▶ View on nbviewer](https://nbviewer.jupyter.org/github/jingquanyang/faang-stock-direction-prediction/blob/main/notebooks/01_data_wrangling.ipynb) |
+| 2 | Feature Engineering | Construct returns, moving averages, volatility windows, intraday spreads, and lagged features; define binary target | [▶ View on nbviewer](https://nbviewer.jupyter.org/github/jingquanyang/faang-stock-direction-prediction/blob/main/notebooks/02_feature_engineering.ipynb) |
+| 3 | Modeling & Evaluation | Train and compare Logistic Regression, Random Forest, and Gradient Boosting; evaluate on held-out test set; feature importance analysis | [▶ View on nbviewer](https://nbviewer.jupyter.org/github/jingquanyang/faang-stock-direction-prediction/blob/main/notebooks/03_modeling_and_evaluation.ipynb) |
 
-Key Findings & Recommendations
+---
 
-Use Gradient Boosting as a ranking tool — rank trading days by predicted upward probability and focus on top-scored opportunities rather than treating predictions as guaranteed signals.
-Combine with risk management — pair model signals with stop-loss rules and minimum return thresholds to account for trading costs on noisy daily moves.
-Retrain regularly — market regimes shift over time; retraining on a rolling 1–2 year window helps keep feature relationships current.
+## Features Engineered
 
+| Category | Features |
+|----------|----------|
+| Returns | `Return1`, `Return3`, `Return5`, `Return10` |
+| Moving Averages | `MA7`, `MA14`, `MA30` |
+| Volatility | `Volatility7`, `Volatility14`, `Volatility30` |
+| Intraday Spreads | `High_Low_Spread`, `Open_Close_Spread` |
+| Lagged Returns | `Lag1`, `Lag2`, `Lag3` |
 
-Tech Stack
+---
 
-Language: Python 3
-Libraries: pandas, numpy, scikit-learn, matplotlib, seaborn
-Models: LogisticRegression, RandomForestClassifier, GradientBoostingClassifier (scikit-learn)
-Data split: 70% train / 30% test, shuffle=False to respect time ordering
+## Model Results
+
+| Model | Accuracy | Precision | Recall | F1 |
+|-------|----------|-----------|--------|----|
+| Logistic Regression | 0.51 | 0.51 | 0.85 | 0.64 |
+| Random Forest | 0.52 | 0.53 | 0.71 | 0.60 |
+| **Gradient Boosting** ✅ | **0.52** | **0.52** | **0.76** | **0.62** |
+
+**Gradient Boosting** was selected as the final model. It achieved the highest recall and F1-score, meaning it captures the most true upward movements with the best precision-recall balance. Top predictors include `Lag1`, `Return1`, `Open_Close_Spread`, `High_Low_Spread`, and `MA7`.
+
+**Final model hyperparameters:** `n_estimators=150`, `learning_rate=0.05`, `max_depth=3`, `random_state=42`
+
+---
+
+## Key Findings & Recommendations
+
+1. **Use Gradient Boosting as a ranking tool** — rank trading days by predicted upward probability and focus on top-scored opportunities rather than treating predictions as guaranteed signals.
+2. **Combine with risk management** — pair model signals with stop-loss rules and minimum return thresholds to account for trading costs on noisy daily moves.
+3. **Retrain regularly** — market regimes shift over time; retraining on a rolling 1–2 year window helps keep feature relationships current.
+
+---
+
+## Tech Stack
+
+- **Language:** Python 3
+- **Libraries:** pandas, numpy, scikit-learn, matplotlib, seaborn
+- **Models:** `LogisticRegression`, `RandomForestClassifier`, `GradientBoostingClassifier` (scikit-learn)
+- **Data split:** 70% train / 30% test, `shuffle=False` to respect time ordering
+
+---
+
+## Author
+
+**Jingquan (Eric) ** · · Springboard Data Science Capstone 2
