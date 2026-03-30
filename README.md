@@ -36,9 +36,9 @@ faang-stock-direction-prediction/
 
 | # | Notebook | Description | Link |
 |---|----------|-------------|------|
-| 1 | Data Wrangling | Load and combine raw FAANG CSVs, parse dates, inspect missing values, explore distributions | [▶ View on nbviewer](https://nbviewer.jupyter.org/github/jingquanyang/faang-stock-direction-prediction/blob/main/notebooks/01_data_wrangling.ipynb) |
-| 2 | Feature Engineering | Construct returns, moving averages, volatility windows, intraday spreads, and lagged features; define binary target | [▶ View on nbviewer](https://nbviewer.jupyter.org/github/jingquanyang/faang-stock-direction-prediction/blob/main/notebooks/02_feature_engineering.ipynb) |
-| 3 | Modeling & Evaluation | Train and compare Logistic Regression, Random Forest, and Gradient Boosting; evaluate on held-out test set; feature importance analysis | [▶ View on nbviewer](https://nbviewer.jupyter.org/github/jingquanyang/faang-stock-direction-prediction/blob/main/notebooks/03_modeling_and_evaluation.ipynb) |
+| 1 | Data Wrangling | Load and combine raw FAANG CSVs, parse dates, inspect missing values, explore distributions 
+| 2 | Feature Engineering | Construct returns, moving averages, volatility windows, intraday spreads, and lagged features; define binary target 
+| 3 | Modeling & Evaluation | Train and compare Logistic Regression, Random Forest, and Gradient Boosting; evaluate on held-out test set; feature importance analysis 
 
 ---
 
